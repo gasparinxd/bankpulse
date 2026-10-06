@@ -1,0 +1,19 @@
+# Variables de entorno (credenciales)
+.env
+.env.*
+!.env.example
+
+# Dependencias y builds
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
