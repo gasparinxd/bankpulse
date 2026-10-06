@@ -1,4 +1,5 @@
 const { pool } = require('../config/db');
+const { version } = require('../../package.json');
 
 async function health(req, res) {
   let database = 'UP';
@@ -7,7 +8,14 @@ async function health(req, res) {
   } catch {
     database = 'DOWN';
   }
-  res.status(200).json({ status: 'UP', database, timestamp: new Date().toISOString() });
+  res.status(200).json({
+    status: 'UP',
+    service: 'bankpulse-backend',
+    version,
+    database,
+    uptimeSeconds: Math.round(process.uptime()),
+    timestamp: new Date().toISOString(),
+  });
 }
 
 module.exports = { health };

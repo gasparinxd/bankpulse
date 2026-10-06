@@ -62,6 +62,23 @@ docker compose exec db psql -U bankpulse -d bankpulse   # consola SQL
 | GET    | `/api/pagos`      | Lista los pagos                     | `200 OK`  |
 | GET    | `/api/pagos/:id`  | Obtiene un pago por id              | `200 OK` / `404 Not Found` |
 
+### Health check
+
+`GET /health` siempre responde **HTTP 200** mientras la API esté viva, e informa del estado de la base de datos:
+
+```json
+{
+  "status": "UP",
+  "service": "bankpulse-backend",
+  "version": "1.0.0",
+  "database": "UP",
+  "uptimeSeconds": 42,
+  "timestamp": "2026-10-05T12:00:00.000Z"
+}
+```
+
+Docker Compose usa este endpoint como `healthcheck` del backend, y el frontend no arranca hasta que el backend está sano.
+
 ### Ejemplos
 
 ```bash
